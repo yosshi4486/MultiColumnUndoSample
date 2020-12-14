@@ -67,6 +67,7 @@ final class PrimaryViewController : UITableViewController {
     }
 
     @objc private func undo(sender: Any) {
+
         managedObjectContext.undo()
     }
 
@@ -114,7 +115,7 @@ final class PrimaryViewController : UITableViewController {
         }
 
         let folder = fetchedResultsController.object(at: indexPath)
-        detailViewController.folder = folder
+        detailViewController.folderObjectID = folder.objectID
     }
 
     static let dateFormatter: DateFormatter = {
