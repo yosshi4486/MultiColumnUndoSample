@@ -15,6 +15,7 @@
 		1849E9802587585C00DF0E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1849E97E2587585C00DF0E21 /* LaunchScreen.storyboard */; };
 		1849E98A25875C9200DF0E21 /* PrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98925875C9200DF0E21 /* PrimaryViewController.swift */; };
 		1849E98D25875CA300DF0E21 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98C25875CA300DF0E21 /* DetailViewController.swift */; };
+		1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98F25875E7000DF0E21 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1849E9812587585C00DF0E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1849E98925875C9200DF0E21 /* PrimaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryViewController.swift; sourceTree = "<group>"; };
 		1849E98C25875CA300DF0E21 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1849E98F25875E7000DF0E21 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				1849E9702587585C00DF0E21 /* AppDelegate.swift */,
 				1849E9722587585C00DF0E21 /* SceneDelegate.swift */,
+				1849E98F25875E7000DF0E21 /* CoreDataStack.swift */,
 				1849E98925875C9200DF0E21 /* PrimaryViewController.swift */,
 				1849E98C25875CA300DF0E21 /* DetailViewController.swift */,
 				1849E9762587585C00DF0E21 /* Main.storyboard */,
@@ -146,6 +149,7 @@
 				1849E9712587585C00DF0E21 /* AppDelegate.swift in Sources */,
 				1849E98A25875C9200DF0E21 /* PrimaryViewController.swift in Sources */,
 				1849E98D25875CA300DF0E21 /* DetailViewController.swift in Sources */,
+				1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */,
 				1849E9732587585C00DF0E21 /* SceneDelegate.swift in Sources */,
 				1849E97B2587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodeld in Sources */,
 			);
