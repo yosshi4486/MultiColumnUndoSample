@@ -46,7 +46,34 @@ final class PrimaryViewController : UITableViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+
+        managedObjectContext.undoManager = UndoManager()
+
+        // Please see for getting information about iPad shortcut command here:
+        // https://developer.apple.com/documentation/uikit/uicommand/adding_menus_and_shortcuts_to_the_menu_bar_and_user_interface
+        let undoCommand = UIKeyCommand(input: "Z", modifierFlags: .command, action: #selector(undo(sender:)))
+        let redoCommand = UIKeyCommand(input: "Z", modifierFlags: [.command, .shift], action: #selector(redo(sender:)))
+        addKeyCommand(undoCommand)
+        addKeyCommand(redoCommand)
     }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+
+        if action == #selector(undo(sender:)) || action == #selector(redo(sender:)) {
+            return true
+        }
+
+        return super.canPerformAction(action, withSender: sender)
+    }
+
+    @objc private func undo(sender: Any) {
+        managedObjectContext.undo()
+    }
+
+    @objc private func redo(sender: Any) {
+        managedObjectContext.redo()
+    }
+
 
     @IBAction func createFolder(_ sender: Any) {
         let createFolderAlertController = UIAlertController(title: "Create Folder", message: nil, preferredStyle: .alert)
