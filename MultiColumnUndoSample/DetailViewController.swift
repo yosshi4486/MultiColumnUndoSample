@@ -10,30 +10,16 @@ import CoreData
 
 final class DetailViewController : UITableViewController {
 
-    var folderObjectID: NSManagedObjectID? {
+    var folder: Folder? {
         didSet {
-            if let newValue = folderObjectID {
-                let fetchRequest = NSFetchRequest<Folder>(entityName: "Folder")
-                fetchRequest.fetchLimit = 1
-                fetchRequest.predicate = NSPredicate(format: "SELF == %@", newValue)
-                folder = try? managedObjectContext.fetch(fetchRequest).first
-            } else {
-                folder = nil
-            }
-            navigationItem.rightBarButtonItem?.isEnabled = folderObjectID != nil
+            navigationItem.rightBarButtonItem?.isEnabled = folder != nil
             _fetchedResultsController = nil
             tableView.reloadData()
         }
     }
 
-    var folder: Folder?
-
-    let managedObjectContext: NSManagedObjectContext = {
-        let parentContext = CoreDataStack.shared.persistentContainer.viewContext
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        context.parent = parentContext
-        context.automaticallyMergesChangesFromParent = true
-        return context
+    private let managedObjectContext: NSManagedObjectContext = {
+        return CoreDataStack.shared.persistentContainer.viewContext
     }()
 
     var _fetchedResultsController: NSFetchedResultsController<Item>?
@@ -44,8 +30,8 @@ final class DetailViewController : UITableViewController {
         }
 
         let fetchRequest = NSFetchRequest<Item>(entityName: "Item")
-        if let folderObjectID = self.folderObjectID {
-            fetchRequest.predicate = NSPredicate(format: "folder == %@", folderObjectID)
+        if let folder = self.folder {
+            fetchRequest.predicate = NSPredicate(format: "folder == %@", folder)
         }
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.date, ascending: true)]
 
@@ -77,9 +63,8 @@ final class DetailViewController : UITableViewController {
         }))
         navigationItem.rightBarButtonItem = addBarButton
 
-        addBarButton.isEnabled = folderObjectID != nil
+        addBarButton.isEnabled = folder != nil
         
-        CoreDataStack.shared.persistentContainer.viewContext.undoManager = UndoManager()
         managedObjectContext.undoManager = UndoManager()
 
         // Please see for getting information about iPad shortcut command here:
@@ -92,8 +77,8 @@ final class DetailViewController : UITableViewController {
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-
-        if action == #selector(undo(sender:)) || action == #selector(redo(sender:)) {
+        let isOccuredInPrimary = (undoManager?.undoActionName ?? "").contains("Folder")
+        if (action == #selector(undo(sender:)) && isOccuredInPrimary) || (action == #selector(redo(sender:))  && isOccuredInPrimary) {
             return true
         }
 
@@ -101,14 +86,12 @@ final class DetailViewController : UITableViewController {
     }
 
     @objc private func undo(sender: Any) {
-
         managedObjectContext.undo()
     }
 
     @objc private func redo(sender: Any) {
         managedObjectContext.redo()
     }
-
 
     @IBAction func createItem(_ sender: Any) {
         let createFolderAlertController = UIAlertController(title: "Create Item", message: nil, preferredStyle: .alert)
@@ -133,14 +116,14 @@ final class DetailViewController : UITableViewController {
         item.date = Date()
         item.folder = self.folder
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     func deleteItem(from indexPath: IndexPath) {
         let deleteExpectedFolder = fetchedResultsController.object(at: indexPath)
         managedObjectContext.delete(deleteExpectedFolder)
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     static let dateFormatter: DateFormatter = {

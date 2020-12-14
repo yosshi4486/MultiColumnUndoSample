@@ -67,7 +67,6 @@ final class PrimaryViewController : UITableViewController {
     }
 
     @objc private func undo(sender: Any) {
-
         managedObjectContext.undo()
     }
 
@@ -98,24 +97,23 @@ final class PrimaryViewController : UITableViewController {
         folder.title = title
         folder.date = Date()
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     func deleteFolder(from indexPath: IndexPath) {
         let deleteExpectedFolder = fetchedResultsController.object(at: indexPath)
         managedObjectContext.delete(deleteExpectedFolder)
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     func setFolderToDetail(indexPath: IndexPath) {
-
         guard let detailViewController = splitViewController?.viewController(for: .secondary) as? DetailViewController else {
             return
         }
 
         let folder = fetchedResultsController.object(at: indexPath)
-        detailViewController.folderObjectID = folder.objectID
+        detailViewController.folder = folder
     }
 
     static let dateFormatter: DateFormatter = {
