@@ -18,9 +18,9 @@ final class DetailViewController : UITableViewController {
         }
     }
 
-    private var managedObjectContext: NSManagedObjectContext {
+    private let managedObjectContext: NSManagedObjectContext = {
         return CoreDataStack.shared.persistentContainer.viewContext
-    }
+    }()
 
     var _fetchedResultsController: NSFetchedResultsController<Item>?
     var fetchedResultsController: NSFetchedResultsController<Item> {
@@ -64,6 +64,33 @@ final class DetailViewController : UITableViewController {
         navigationItem.rightBarButtonItem = addBarButton
 
         addBarButton.isEnabled = folder != nil
+        
+        managedObjectContext.undoManager = UndoManager()
+
+        // Please see for getting information about iPad shortcut command here:
+        // https://developer.apple.com/documentation/uikit/uicommand/adding_menus_and_shortcuts_to_the_menu_bar_and_user_interface
+        let undoCommand = UIKeyCommand(input: "Z", modifierFlags: .command, action: #selector(undo(sender:)))
+        let redoCommand = UIKeyCommand(input: "Z", modifierFlags: [.command, .shift], action: #selector(redo(sender:)))
+        addKeyCommand(undoCommand)
+        addKeyCommand(redoCommand)
+
+    }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        let isOccuredInPrimary = (undoManager?.undoActionName ?? "").contains("Folder")
+        if (action == #selector(undo(sender:)) && isOccuredInPrimary) || (action == #selector(redo(sender:))  && isOccuredInPrimary) {
+            return true
+        }
+
+        return super.canPerformAction(action, withSender: sender)
+    }
+
+    @objc private func undo(sender: Any) {
+        managedObjectContext.undo()
+    }
+
+    @objc private func redo(sender: Any) {
+        managedObjectContext.redo()
     }
 
     @IBAction func createItem(_ sender: Any) {
@@ -89,14 +116,14 @@ final class DetailViewController : UITableViewController {
         item.date = Date()
         item.folder = self.folder
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     func deleteItem(from indexPath: IndexPath) {
         let deleteExpectedFolder = fetchedResultsController.object(at: indexPath)
         managedObjectContext.delete(deleteExpectedFolder)
 
-        CoreDataStack.shared.saveContext()
+        try! managedObjectContext.save()
     }
 
     static let dateFormatter: DateFormatter = {
