@@ -80,6 +80,16 @@ final class PrimaryViewController : UITableViewController {
         CoreDataStack.shared.saveContext()
     }
 
+    func setFolderToDetail(indexPath: IndexPath) {
+
+        guard let detailViewController = splitViewController?.viewController(for: .secondary) as? DetailViewController else {
+            return
+        }
+
+        let folder = fetchedResultsController.object(at: indexPath)
+        detailViewController.folder = folder
+    }
+
     static let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .short
@@ -114,6 +124,10 @@ final class PrimaryViewController : UITableViewController {
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        setFolderToDetail(indexPath: indexPath)
     }
 
 

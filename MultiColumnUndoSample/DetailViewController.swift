@@ -10,7 +10,13 @@ import CoreData
 
 final class DetailViewController : UITableViewController {
 
-    var folder: Folder?
+    var folder: Folder? {
+        didSet {
+            navigationItem.rightBarButtonItem?.isEnabled = folder != nil
+            _fetchedResultsController = nil
+            tableView.reloadData()
+        }
+    }
 
     private var managedObjectContext: NSManagedObjectContext {
         return CoreDataStack.shared.persistentContainer.viewContext
@@ -24,6 +30,9 @@ final class DetailViewController : UITableViewController {
         }
 
         let fetchRequest = NSFetchRequest<Item>(entityName: "Item")
+        if let folder = self.folder {
+            fetchRequest.predicate = NSPredicate(format: "folder == %@", folder)
+        }
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Item.date, ascending: true)]
 
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -53,6 +62,8 @@ final class DetailViewController : UITableViewController {
             self?.createItem(action)
         }))
         navigationItem.rightBarButtonItem = addBarButton
+
+        addBarButton.isEnabled = folder != nil
     }
 
     @IBAction func createItem(_ sender: Any) {
@@ -73,9 +84,10 @@ final class DetailViewController : UITableViewController {
     }
 
     func createItem(from title: String?) {
-        let folder = Item(context: managedObjectContext)
-        folder.title = title
-        folder.date = Date()
+        let item = Item(context: managedObjectContext)
+        item.title = title
+        item.date = Date()
+        item.folder = self.folder
 
         CoreDataStack.shared.saveContext()
     }
