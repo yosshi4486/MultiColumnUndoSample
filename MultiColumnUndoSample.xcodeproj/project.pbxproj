@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		1849E9712587585C00DF0E21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E9702587585C00DF0E21 /* AppDelegate.swift */; };
 		1849E9732587585C00DF0E21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E9722587585C00DF0E21 /* SceneDelegate.swift */; };
-		1849E9752587585C00DF0E21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E9742587585C00DF0E21 /* ViewController.swift */; };
 		1849E9782587585C00DF0E21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1849E9762587585C00DF0E21 /* Main.storyboard */; };
 		1849E97B2587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1849E9792587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodeld */; };
 		1849E97D2587585C00DF0E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1849E97C2587585C00DF0E21 /* Assets.xcassets */; };
 		1849E9802587585C00DF0E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1849E97E2587585C00DF0E21 /* LaunchScreen.storyboard */; };
+		1849E98A25875C9200DF0E21 /* PrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98925875C9200DF0E21 /* PrimaryViewController.swift */; };
+		1849E98D25875CA300DF0E21 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98C25875CA300DF0E21 /* DetailViewController.swift */; };
+		1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849E98F25875E7000DF0E21 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1849E96D2587585C00DF0E21 /* MultiColumnUndoSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiColumnUndoSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1849E9702587585C00DF0E21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1849E9722587585C00DF0E21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1849E9742587585C00DF0E21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1849E9772587585C00DF0E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1849E97A2587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MultiColumnUndoSample.xcdatamodel; sourceTree = "<group>"; };
 		1849E97C2587585C00DF0E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1849E97F2587585C00DF0E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1849E9812587585C00DF0E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1849E98925875C9200DF0E21 /* PrimaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryViewController.swift; sourceTree = "<group>"; };
+		1849E98C25875CA300DF0E21 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1849E98F25875E7000DF0E21 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,9 @@
 			children = (
 				1849E9702587585C00DF0E21 /* AppDelegate.swift */,
 				1849E9722587585C00DF0E21 /* SceneDelegate.swift */,
-				1849E9742587585C00DF0E21 /* ViewController.swift */,
+				1849E98F25875E7000DF0E21 /* CoreDataStack.swift */,
+				1849E98925875C9200DF0E21 /* PrimaryViewController.swift */,
+				1849E98C25875CA300DF0E21 /* DetailViewController.swift */,
 				1849E9762587585C00DF0E21 /* Main.storyboard */,
 				1849E97C2587585C00DF0E21 /* Assets.xcassets */,
 				1849E97E2587585C00DF0E21 /* LaunchScreen.storyboard */,
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1849E9752587585C00DF0E21 /* ViewController.swift in Sources */,
 				1849E9712587585C00DF0E21 /* AppDelegate.swift in Sources */,
+				1849E98A25875C9200DF0E21 /* PrimaryViewController.swift in Sources */,
+				1849E98D25875CA300DF0E21 /* DetailViewController.swift in Sources */,
+				1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */,
 				1849E9732587585C00DF0E21 /* SceneDelegate.swift in Sources */,
 				1849E97B2587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodeld in Sources */,
 			);
