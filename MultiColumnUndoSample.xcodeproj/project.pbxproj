@@ -24,6 +24,8 @@
 		184D7EAE2588D18D00042623 /* DetailViewController+FRCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EAD2588D18D00042623 /* DetailViewController+FRCDelegate.swift */; };
 		184D7EB12588D1C700042623 /* DetailViewController+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB02588D1C700042623 /* DetailViewController+TableViewDataSource.swift */; };
 		184D7EB42588D21400042623 /* DetailViewController+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB32588D21400042623 /* DetailViewController+TableViewDelegate.swift */; };
+		184D7EB72588D3F800042623 /* DetailViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB62588D3F800042623 /* DetailViewController+Drag.swift */; };
+		184D7EBA2588D4D200042623 /* DetailViewController+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB92588D4D200042623 /* DetailViewController+Drop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		184D7EAD2588D18D00042623 /* DetailViewController+FRCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+FRCDelegate.swift"; sourceTree = "<group>"; };
 		184D7EB02588D1C700042623 /* DetailViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		184D7EB32588D21400042623 /* DetailViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		184D7EB62588D3F800042623 /* DetailViewController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Drag.swift"; sourceTree = "<group>"; };
+		184D7EB92588D4D200042623 /* DetailViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Drop.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				184D7EAD2588D18D00042623 /* DetailViewController+FRCDelegate.swift */,
 				184D7EB02588D1C700042623 /* DetailViewController+TableViewDataSource.swift */,
 				184D7EB32588D21400042623 /* DetailViewController+TableViewDelegate.swift */,
+				184D7EB62588D3F800042623 /* DetailViewController+Drag.swift */,
+				184D7EB92588D4D200042623 /* DetailViewController+Drop.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -197,6 +203,8 @@
 				184D7EB42588D21400042623 /* DetailViewController+TableViewDelegate.swift in Sources */,
 				1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */,
 				1849E9732587585C00DF0E21 /* SceneDelegate.swift in Sources */,
+				184D7EB72588D3F800042623 /* DetailViewController+Drag.swift in Sources */,
+				184D7EBA2588D4D200042623 /* DetailViewController+Drop.swift in Sources */,
 				184D7EB12588D1C700042623 /* DetailViewController+TableViewDataSource.swift in Sources */,
 				184D7EAB2588D00500042623 /* PrimaryViewController+TableViewDataSource.swift in Sources */,
 				1849E97B2587585C00DF0E21 /* MultiColumnUndoSample.xcdatamodeld in Sources */,

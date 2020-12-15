@@ -21,7 +21,7 @@ final class DetailViewController : UITableViewController {
         }
     }
 
-    private let managedObjectContext: NSManagedObjectContext = {
+    let managedObjectContext: NSManagedObjectContext = {
         return CoreDataStack.shared.persistentContainer.viewContext
     }()
 
@@ -60,6 +60,9 @@ final class DetailViewController : UITableViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
 
         let addBarButton = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { [weak self] (action) in
             self?.createItem(action)
