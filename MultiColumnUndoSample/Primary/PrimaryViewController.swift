@@ -72,7 +72,7 @@ final class PrimaryViewController : UITableViewController {
         return super.canPerformAction(action, withSender: sender)
     }
 
-    // MARK: - Specific Actions(like a CRUD)
+    // MARK: - Primary Actions of ViewController
     @objc private func undo(sender: Any) {
         managedObjectContext.undo()
     }
@@ -123,6 +123,7 @@ final class PrimaryViewController : UITableViewController {
         detailViewController.folder = folder
     }
 
+    // MARK: - Utils
     static let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .short
@@ -130,27 +131,10 @@ final class PrimaryViewController : UITableViewController {
         return df
     }()
 
-    // MARK: - TableView DataSource
-
     func configure(_ cell: UITableViewCell, at indexPath: IndexPath) {
         let folder = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = folder.title
         cell.detailTextLabel?.text = Self.dateFormatter.string(from: folder.date!)
     }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        configure(cell, at: indexPath)
-        return cell
-    }
-
 
 }
