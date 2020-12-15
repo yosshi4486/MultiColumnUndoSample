@@ -11,14 +11,25 @@ import CoreData
 extension PrimaryViewController : NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+
+        if isUserDriven {
+            return
+        }
         tableView.beginUpdates()
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+        if !isUserDriven {
+            tableView.endUpdates()
+        }
+        isUserDriven = false
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+
+        guard !isUserDriven else {
+            return
+        }
 
         switch type {
         case .insert:

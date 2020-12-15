@@ -15,6 +15,8 @@ final class PrimaryViewController : UITableViewController {
         return CoreDataStack.shared.persistentContainer.viewContext
     }
 
+    var isUserDriven: Bool = false
+
     var _fetchedResultsController: NSFetchedResultsController<Folder>?
     var fetchedResultsController: NSFetchedResultsController<Folder> {
 
