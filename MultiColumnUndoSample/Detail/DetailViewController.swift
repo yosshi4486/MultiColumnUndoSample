@@ -14,6 +14,7 @@ final class DetailViewController : UITableViewController {
 
     var folder: Folder? {
         didSet {
+            navigationItem.title = folder?.title
             navigationItem.rightBarButtonItem?.isEnabled = folder != nil
             _fetchedResultsController = nil
             tableView.reloadData()
