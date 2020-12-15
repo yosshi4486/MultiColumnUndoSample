@@ -11,7 +11,7 @@ import CoreData
 final class PrimaryViewController : UITableViewController {
 
     // MARK: - Variables
-    private var managedObjectContext: NSManagedObjectContext {
+    var managedObjectContext: NSManagedObjectContext {
         return CoreDataStack.shared.persistentContainer.viewContext
     }
 
@@ -48,6 +48,9 @@ final class PrimaryViewController : UITableViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
 
         // Please see for getting information about iPad shortcut command here:
         // https://developer.apple.com/documentation/uikit/uicommand/adding_menus_and_shortcuts_to_the_menu_bar_and_user_interface
