@@ -28,7 +28,15 @@ extension PrimaryViewController : UITableViewDropDelegate {
 
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
 
-        if let destinationIndexPath = coordinator.destinationIndexPath, coordinator.proposal.intent == .insertIntoDestinationIndexPath {
+        if let destinationIndexPath = coordinator.destinationIndexPath,
+           let localContext = coordinator.session.localDragSession?.localContext as? LocalDragAndDropContext<Item>,
+           localContext.author == "SampleApp.Detail" {
+
+            let folder = fetchedResultsController.object(at: destinationIndexPath)
+            for item in localContext.items {
+                item.folder = folder
+            }
+        } else if let destinationIndexPath = coordinator.destinationIndexPath, coordinator.proposal.intent == .insertIntoDestinationIndexPath {
 
             let folder = fetchedResultsController.object(at: destinationIndexPath)
 

@@ -26,6 +26,7 @@
 		184D7EB42588D21400042623 /* DetailViewController+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB32588D21400042623 /* DetailViewController+TableViewDelegate.swift */; };
 		184D7EB72588D3F800042623 /* DetailViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB62588D3F800042623 /* DetailViewController+Drag.swift */; };
 		184D7EBA2588D4D200042623 /* DetailViewController+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EB92588D4D200042623 /* DetailViewController+Drop.swift */; };
+		184D7EBF2588DBDD00042623 /* LocalDragAndDropContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D7EBE2588DBDD00042623 /* LocalDragAndDropContext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		184D7EB32588D21400042623 /* DetailViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		184D7EB62588D3F800042623 /* DetailViewController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Drag.swift"; sourceTree = "<group>"; };
 		184D7EB92588D4D200042623 /* DetailViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Drop.swift"; sourceTree = "<group>"; };
+		184D7EBE2588DBDD00042623 /* LocalDragAndDropContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDragAndDropContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				1849E9702587585C00DF0E21 /* AppDelegate.swift */,
 				1849E9722587585C00DF0E21 /* SceneDelegate.swift */,
 				1849E98F25875E7000DF0E21 /* CoreDataStack.swift */,
+				184D7EBE2588DBDD00042623 /* LocalDragAndDropContext.swift */,
 				184D7EA62588C8B700042623 /* Primary */,
 				184D7EA82588CF8F00042623 /* Detail */,
 				1849E9762587585C00DF0E21 /* Main.storyboard */,
@@ -202,6 +205,7 @@
 				184D7EA42588C85E00042623 /* PrimaryViewController+FRCDelegate.swift in Sources */,
 				184D7EB42588D21400042623 /* DetailViewController+TableViewDelegate.swift in Sources */,
 				1849E99025875E7000DF0E21 /* CoreDataStack.swift in Sources */,
+				184D7EBF2588DBDD00042623 /* LocalDragAndDropContext.swift in Sources */,
 				1849E9732587585C00DF0E21 /* SceneDelegate.swift in Sources */,
 				184D7EB72588D3F800042623 /* DetailViewController+Drag.swift in Sources */,
 				184D7EBA2588D4D200042623 /* DetailViewController+Drop.swift in Sources */,
