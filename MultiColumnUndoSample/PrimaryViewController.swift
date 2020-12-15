@@ -10,6 +10,7 @@ import CoreData
 
 final class PrimaryViewController : UITableViewController {
 
+    // MARK: - Variables
     private var managedObjectContext: NSManagedObjectContext {
         return CoreDataStack.shared.persistentContainer.viewContext
     }
@@ -41,13 +42,12 @@ final class PrimaryViewController : UITableViewController {
         return _fetchedResultsController!
     }
 
+    // MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
-
-        managedObjectContext.undoManager = UndoManager()
 
         // Please see for getting information about iPad shortcut command here:
         // https://developer.apple.com/documentation/uikit/uicommand/adding_menus_and_shortcuts_to_the_menu_bar_and_user_interface
@@ -59,6 +59,7 @@ final class PrimaryViewController : UITableViewController {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
 
+        // The viewController receive a responder event after detail. Update this code if you would like to do additional handling to undo/redo.
         if action == #selector(undo(sender:)) || action == #selector(redo(sender:)) {
             return true
         }
@@ -66,6 +67,7 @@ final class PrimaryViewController : UITableViewController {
         return super.canPerformAction(action, withSender: sender)
     }
 
+    // MARK: - Specific Actions(like a CRUD)
     @objc private func undo(sender: Any) {
         managedObjectContext.undo()
     }
@@ -122,6 +124,8 @@ final class PrimaryViewController : UITableViewController {
         df.timeStyle = .full
         return df
     }()
+
+    // MARK: - TableView Delegate
 
     func configure(_ cell: UITableViewCell, at indexPath: IndexPath) {
         let folder = fetchedResultsController.object(at: indexPath)

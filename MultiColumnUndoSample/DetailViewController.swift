@@ -77,8 +77,8 @@ final class DetailViewController : UITableViewController {
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        let isOccuredInPrimary = (undoManager?.undoActionName ?? "").contains("Folder")
-        if (action == #selector(undo(sender:)) && isOccuredInPrimary) || (action == #selector(redo(sender:))  && isOccuredInPrimary) {
+        // In UISplitViewController, a responder event is dispatched to detailViewController at first, then it will be dispatched to primary.
+        if (action == #selector(undo(sender:))) || (action == #selector(redo(sender:))) {
             return true
         }
 
