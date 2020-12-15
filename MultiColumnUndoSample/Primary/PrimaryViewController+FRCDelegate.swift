@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension PrimaryViewController : NSFetchedResultsControllerDelegate {
 
