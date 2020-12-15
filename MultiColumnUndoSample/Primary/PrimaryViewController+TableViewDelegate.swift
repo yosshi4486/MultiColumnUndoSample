@@ -39,4 +39,9 @@ extension PrimaryViewController {
         try! managedObjectContext.save()
     }
 
+    override func tableView(_ tableView: UITableView, shouldSpringLoadRowAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
+        setFolderToDetail(indexPath: indexPath)
+        return true
+    }
+
 }
