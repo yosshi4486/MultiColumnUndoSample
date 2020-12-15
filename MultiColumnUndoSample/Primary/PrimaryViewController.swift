@@ -11,9 +11,11 @@ import CoreData
 final class PrimaryViewController : UITableViewController {
 
     // MARK: - Variables
-    private var managedObjectContext: NSManagedObjectContext {
+    var managedObjectContext: NSManagedObjectContext {
         return CoreDataStack.shared.persistentContainer.viewContext
     }
+
+    var isUserDriven: Bool = false
 
     var _fetchedResultsController: NSFetchedResultsController<Folder>?
     var fetchedResultsController: NSFetchedResultsController<Folder> {
@@ -48,6 +50,9 @@ final class PrimaryViewController : UITableViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
 
         // Please see for getting information about iPad shortcut command here:
         // https://developer.apple.com/documentation/uikit/uicommand/adding_menus_and_shortcuts_to_the_menu_bar_and_user_interface
@@ -67,7 +72,7 @@ final class PrimaryViewController : UITableViewController {
         return super.canPerformAction(action, withSender: sender)
     }
 
-    // MARK: - Specific Actions(like a CRUD)
+    // MARK: - Primary Actions of ViewController
     @objc private func undo(sender: Any) {
         managedObjectContext.undo()
     }
@@ -118,6 +123,7 @@ final class PrimaryViewController : UITableViewController {
         detailViewController.folder = folder
     }
 
+    // MARK: - Utils
     static let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .short
@@ -125,96 +131,10 @@ final class PrimaryViewController : UITableViewController {
         return df
     }()
 
-    // MARK: - TableView Delegate
-
     func configure(_ cell: UITableViewCell, at indexPath: IndexPath) {
         let folder = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = folder.title
         cell.detailTextLabel?.text = Self.dateFormatter.string(from: folder.date!)
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        configure(cell, at: indexPath)
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, _) in
-            self?.deleteFolder(from: indexPath)
-        }
-
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        setFolderToDetail(indexPath: indexPath)
-    }
-
-
 }
-
-extension PrimaryViewController : NSFetchedResultsControllerDelegate {
-
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
-        switch type {
-        case .insert:
-
-            guard let newIndexPath = newIndexPath else {
-                return
-            }
-
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-
-        case .delete:
-
-            guard let indexPath = indexPath else {
-                return
-            }
-
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-
-        case .update:
-
-            guard let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) else {
-                return
-            }
-
-            configure(cell, at: indexPath)
-
-        case .move:
-
-            guard let indexPath = indexPath, let newIndexPath = newIndexPath else {
-                return
-            }
-
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-
-        @unknown default:
-            fatalError("New NSFetchedResultsChangeType has added by API changes.")
-        }
-
-
-    }
-
-}
-
