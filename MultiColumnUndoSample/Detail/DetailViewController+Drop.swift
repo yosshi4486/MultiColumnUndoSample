@@ -17,7 +17,9 @@ extension DetailViewController : UITableViewDropDelegate {
         
         var proposal = UITableViewDropProposal(operation: .cancel)
 
-        if tableView.hasActiveDrag {
+        if let localSession = session.localDragSession?.localContext as? LocalDragAndDropContext<Folder>, localSession.author == "SampleApp.Primary" {
+            proposal = UITableViewDropProposal(operation: .cancel)
+        } else if tableView.hasActiveDrag {
             // This proposal goes to move delegate method.
             proposal = UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         } else {

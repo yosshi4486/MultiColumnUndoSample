@@ -11,6 +11,7 @@ import MobileCoreServices
 extension PrimaryViewController : UITableViewDragDelegate {
 
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        session.localContext = LocalDragAndDropContext<Folder>(author: "SampleApp.Primary", items: [])
         return dragItems(for: indexPath)
     }
 
